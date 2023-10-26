@@ -1,7 +1,6 @@
 package geometry;
-
 public enum Shapes {
-	DOT,
+	DOT,  
 	RECTANGLE,
 	LINE,
 	CIRCLE,

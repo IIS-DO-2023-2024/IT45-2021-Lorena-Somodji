@@ -21,7 +21,7 @@ public class AddCircle extends JDialog {
 	
 	public static void main(String[] args) {
 		try {
-			AddCircle dialog = new AddCircle();
+			AddCircle dialog = new AddCircle(); 
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -30,7 +30,7 @@ public class AddCircle extends JDialog {
 	}
 	
 	public AddCircle() {
-		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); 
 		setBounds(100, 100, 400, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
@@ -112,8 +112,6 @@ public class AddCircle extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						try {
-							
-							Circle c = new Circle(new Dot(Integer.parseInt(x.getText()), Integer.parseInt(y.getText())),Integer.parseInt(r.getText()));
 							result = true; 
 							setVisible(false); 
 							dispose();
@@ -166,8 +164,9 @@ public class AddCircle extends JDialog {
 			r.setEnabled(true);
 		}
 		
-		this.setModal(true);
+		this.setModal(true); 
 		this.setVisible(true); 
+		
 		if(result) 
 		{
 			try {
@@ -175,7 +174,7 @@ public class AddCircle extends JDialog {
 				return c;
 			} catch (NumberFormatException e1) 
 			{
-				throw e1;
+		      throw e1; 
 			}catch (Exception e) {
 				throw e;
 			}

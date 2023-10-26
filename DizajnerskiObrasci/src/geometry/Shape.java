@@ -4,34 +4,33 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
-public abstract class Shape implements Moveable, Comparable {
-	
+public abstract class Shape implements Moveable, Comparable { 
 	protected boolean selected; 
 	protected Shapes shape;  
 	protected  Color colorDrive; 
-
+	
 	public Shape() {
 
 	}
 
-	public boolean isSelected() {
+	public boolean isSelected() { 
 		return this.selected;
 	}
 
-	public void setSelected(boolean selected) {
+	public void setSelected(boolean selected) { 
 		this.selected = selected;
 	}
-
-	public abstract void draw(Graphics g, boolean selected );
+	
+	public abstract void draw(Graphics g, boolean selected); 
 	public abstract boolean contains(int x, int y);
-	public abstract boolean contains(Dot one);
-
+	public abstract boolean contains(Dot one); 
+	
 	public Shapes getShape()
 	{
-		return this.shape;
+		return this.shape; 
 	}
-
-	public Color getColorDrive()
+  
+	public Color getColorDrive() 
 	{
 		return this.colorDrive;
 	}
@@ -45,4 +44,5 @@ public abstract class Shape implements Moveable, Comparable {
 	{
 		return this.selected;
 	}
+	
 }

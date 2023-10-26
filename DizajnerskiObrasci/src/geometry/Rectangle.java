@@ -13,14 +13,9 @@ public class Rectangle extends Shape {
 	private int width; 
 	private Color colorFill;
 
-	public Rectangle () {
+	public Rectangle () 
+	{
 		this.upperLeftPoint = new Dot();
-	}
-
-	public Rectangle(Dot upperLeftPoint, int height, int width)  {
-		this.upperLeftPoint = upperLeftPoint;
-		this.height = height;
-		this.width = width;
 	}
 
 	public Rectangle(Dot one, int height, int width, Color colorDrive, Color colorFill) throws Exception 
@@ -54,24 +49,36 @@ public class Rectangle extends Shape {
 		return this.upperLeftPoint;
 	}
 
-	public void setUpperLeftPoint(Dot upperLeftPoint) {
-		this.upperLeftPoint = upperLeftPoint;
+	public void setUpperLeftPoint(Dot upperLeftPoint) throws Exception 
+	{
+		this.upperLeftPoint = new Dot(upperLeftPoint.getX(),upperLeftPoint.getY());
 	}
 
 	public int getHeight() {
 		return this.height;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setHeight(int height) throws Exception {
+		if(height > 0) {
+			this.height = height;
+		}
+		else {
+			throw new Exception ("Visina mora biti pozitivna!");
+		}
+		
 	}
 
 	public int getWidth() {
 		return this.width;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setWidth(int width) throws Exception {
+		if(width > 0) {
+			this.width = width;
+		}
+		else {
+			throw new Exception ("Sirina mora biti pozitivna!");
+		}
 	}
 	
 	public Color getColorFill()
@@ -92,7 +99,7 @@ public class Rectangle extends Shape {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Rectangle) {
-			Rectangle r = (Rectangle)o; // Kastovanje
+			Rectangle r = (Rectangle)o; 
 			return (r.getUpperLeftPoint().equals(this.upperLeftPoint) &&
 					r.getHeight() == this.height && r.getWidth() == this.width);
 		} else {
@@ -109,11 +116,11 @@ public class Rectangle extends Shape {
 		return false;
 	}
 
-	public void moveBy(int byX, int byY) {
+	public void moveBy(int byX, int byY) {///pomera ya x y 
 		((Moveable) this.upperLeftPoint).moveBy(byX, byY);
 	}
 
-	public void moveTo(int x, int y) {
+	public void moveTo(int x, int y) {//premesti
 		((Moveable) this.upperLeftPoint).moveTo(x, y);
 	}
 
@@ -136,6 +143,7 @@ public class Rectangle extends Shape {
 				g.fillRect(getUpperLeftPoint().getX()-2, getUpperLeftPoint().getY()-2, getWidth()+5, height+5);
 				g.setColor(Color.BLACK);
 				g.fillRect(getUpperLeftPoint().getX()-1, getUpperLeftPoint().getY()-1, getWidth()+2, height+2);
+			
 			}
 
 			Graphics2D g2 = (Graphics2D) g;

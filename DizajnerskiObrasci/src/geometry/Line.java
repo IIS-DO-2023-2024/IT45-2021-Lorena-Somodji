@@ -15,17 +15,7 @@ public class Line extends Shape {
 		startPoint = new Dot();
 		endPoint = new Dot();		
 	}
-
-	public Line(Dot startPoint, Dot endPoint) {
-		this.startPoint = startPoint;
-		this.endPoint = endPoint;
-	}
-
-	public Line(Dot startPoint, Dot endPoint, boolean selected) {
-		this(startPoint, endPoint);
-		this.selected = selected;
-	}
-
+	
 	public Line(Dot one, Dot two, Color colorDrive) throws Exception 
 	{
 		if(one != null && two != null) 
@@ -51,15 +41,18 @@ public class Line extends Shape {
 		return this.startPoint;
 	}
 
-	public void setStartPoint(Dot startPoint) throws Exception {
-		this.startPoint = new Dot(startPoint.getX(), startPoint.getY());
+	public void setStartPoint(Dot startPoint) throws Exception 
+	{
+		this.startPoint = new Dot(startPoint.getX(), startPoint.getY());	
 	}
 
-	public Dot getEndPoint() {
+	public Dot getEndPoint() 
+	{
 		return this.endPoint;
 	}
 
-	public void setEndPoint(Dot endPoint) throws Exception {
+	public void setEndPoint(Dot endPoint) throws Exception 
+	{
 		this.endPoint = new Dot(endPoint.getX(), endPoint.getY());
 	}
 
@@ -133,6 +126,5 @@ public class Line extends Shape {
 		if(this.getStartPoint().distance(one.getX(), one.getY())+this.getEndPoint().distance(one.getX(), one.getY()) - this.length() < 0.05f && this.getStartPoint().distance(one.getX(), one.getY())+this.getEndPoint().distance(one.getX(), one.getY()) - this.length() > -0.05f) return true;
 		else return false;
 	}
-
 }
 

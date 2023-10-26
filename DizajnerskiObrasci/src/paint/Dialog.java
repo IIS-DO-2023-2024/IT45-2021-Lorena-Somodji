@@ -21,6 +21,7 @@ public class Dialog extends JDialog {
 	private JTextField b;
 	private JTextField a;
 	
+	
 	private JLabel naslov;
 	private JLabel parameter3;
 	private JLabel parameter4;
@@ -221,7 +222,7 @@ public class Dialog extends JDialog {
 	}
 	
 	public void Prepare(Shapes ob) 
-	{
+	{  
 		if(ob == Shapes.CIRCLE) 
 		{
 			naslov.setText("SET CIRCLE PARAMETERS!");
@@ -292,7 +293,7 @@ public class Dialog extends JDialog {
 	
 	public Shape showDialog(Shape shape)
 	{
-		if(shape!=null) { 
+		if(shape!=null) {
 			this.Prepare(shape.getShape());
 	
 			if(shape instanceof Circle) 
@@ -349,7 +350,7 @@ public class Dialog extends JDialog {
 	
 	public Shape createShape(Shapes ob) 
 	{
-		try {
+		try {  
 			Shape shape;
 			
 			Dot tacka = new Dot( Integer.parseInt(x.getText().trim()), Integer.parseInt(y.getText().trim()));
@@ -360,7 +361,7 @@ public class Dialog extends JDialog {
 				return shape;
 					
 			}else if(ob == Shapes.RECTANGLE) 
-			{
+			{ 
 				shape = new Rectangle(tacka, Integer.parseInt(a.getText().trim()) , Integer.parseInt(b.getText().trim()), colorsDrive.getBackground(), colorsFill.getBackground());
 				return shape;
 				
@@ -388,10 +389,9 @@ public class Dialog extends JDialog {
 	
 	public Shape swapValuesShape(Shape shape) 
 	{
-		try {
-			
+		try { 
 			if(shape instanceof Circle) 
-			{
+			{ 
 				Circle circle = (Circle)shape;
 				circle.moveTo(Integer.parseInt(x.getText().trim()), Integer.parseInt(y.getText().trim()));
 				circle.setRadius(Integer.parseInt(a.getText().trim()));
@@ -410,7 +410,7 @@ public class Dialog extends JDialog {
 				rectangle.setColorFill(colorsFill.getBackground());
 				
 				return rectangle;
-				
+		
 			}else if (shape instanceof Donut) 
 			{
 				Donut donut = (Donut)shape;

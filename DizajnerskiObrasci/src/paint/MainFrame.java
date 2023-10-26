@@ -2,6 +2,7 @@ package paint;
 
 import geometry.Line;
 import geometry.Shapes;
+import geometry.Circle;
 import geometry.Dot;
 
 import java.awt.*;
@@ -19,7 +20,10 @@ public class MainFrame extends JFrame{
 	private ButtonGroup btnGroup; 
 	private String currentShape;
 	private Dialog dialog; 
-
+	
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,12 +41,11 @@ public class MainFrame extends JFrame{
 	public MainFrame() {
 		initialize();
 	}
-
 	private void AddObject() 
 	{
 		try {
 			if(currentShape == Shapes.DOT.toString()) 
-			{
+			{ 
 				drawPanel.add(new Dot(one.getX(),one.getY(),colors.getBackground()));
 			} else if(currentShape == Shapes.LINE.toString()) 
 			{
@@ -67,7 +70,7 @@ public class MainFrame extends JFrame{
             if (button.isSelected()) {
             	currentShape = button.getText(); 
                 return button.getText(); 
-            }
+            } 
         }
 
         return null;
@@ -148,14 +151,15 @@ public class MainFrame extends JFrame{
 			delButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					if(drawPanel.getSelect()) {
+				
+					if(drawPanel.getSelect()){
 						int rezult = JOptionPane.showConfirmDialog(
 								null,
-								"Da li ûelite da obriöete oblik?",
+								"Da li ≈æelite da obri≈°ete oblik?",
 								"Poruka",
 								JOptionPane.YES_NO_OPTION); 
 						if(rezult == JOptionPane.YES_OPTION){
-							drawPanel.Delete();
+							drawPanel.delete();
 						}
 					} else JOptionPane.showMessageDialog(null, "Nema selektovanog objekata!");
 				}
@@ -164,16 +168,18 @@ public class MainFrame extends JFrame{
 				delButton.setActionCommand("");
 				buttonPane.add(delButton);
 				
+				
 			}
 			{
+				 
 				JButton editButton = new JButton("EDIT");
 				editButton.setBackground(Color.WHITE);
 				editButton.setActionCommand("");
 				editButton.addMouseListener(new MouseAdapter() {
-					@Override
+					@Override 
 					public void mouseClicked(MouseEvent e) {
-						if(drawPanel.getSelect()) {
-							drawPanel.Edit();
+						if(drawPanel.getSelect()) { 
+							
 						} else JOptionPane.showMessageDialog(null, "Nema selektovanog objekata!");
 						
 					}
@@ -184,7 +190,7 @@ public class MainFrame extends JFrame{
 		drawPanel = new PnlDrawing();
 		
 		drawPanel.addMouseListener(new MouseAdapter() {
-			private String prevSelected;
+			private String prevSelected; 
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -193,22 +199,22 @@ public class MainFrame extends JFrame{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				
 				if(e.getButton() == MouseEvent.BUTTON1) 
-				{	
-					if(drawPanel.getSelect())
-					{
-						drawPanel.setSelected(-1);
+				{
+					if(drawPanel.getSelect()) 
+					{ 
+						drawPanel.setSelect(false);
 						return;
 					}
 					
 					if(SelektovanoDugme(btnGroup) == Shapes.LINE.toString() && prevSelected == SelektovanoDugme(btnGroup)) {
-						if(two!=null) two = null;
-						else two = one;
-					}else two = null;
+						if(two!=null) two = null; 
+						else two = one; 
+					}else two = null; 
+					
 					
 					Point p = e.getPoint();
-					try {
+					try { 
 						one = new Dot(p.x,p.y);
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -221,10 +227,11 @@ public class MainFrame extends JFrame{
 					if(p != null) {
 						try {
 							one = new Dot(p.x,p.y);
+							drawPanel.select(one); 
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(null, e1.getMessage());
 						}
-						drawPanel.Select(one); 
+						
 					}
 				}
 				

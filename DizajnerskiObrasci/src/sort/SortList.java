@@ -11,6 +11,7 @@ import geometry.Circle;
 public class SortList extends JFrame{
 
 	private ModifiedListModel objekti;
+	//private DefaultListModel objekti;
 	private JList list;
 	private AddCircleDialog dijalog;
 
@@ -39,8 +40,6 @@ public class SortList extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		dijalog = new AddCircleDialog();
-		
-		
 		objekti = new ModifiedListModel();
 		
 		list = new JList(objekti);
@@ -66,10 +65,9 @@ public class SortList extends JFrame{
 						objekti.addElement(c);
 						objekti.Sort(1);
 					}
-				}catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, e1.toString(),"Greska",2);
-				}
-				
+					}catch (Exception e1) { 
+						JOptionPane.showMessageDialog(null, e1.toString(),"Greska",2);
+					}
 			}
 		});
 		add.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -94,3 +92,14 @@ public class SortList extends JFrame{
 	}
 
 }
+
+//
+
+
+
+
+
+
+
+
+

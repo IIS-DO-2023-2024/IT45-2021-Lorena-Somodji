@@ -36,8 +36,10 @@ public class Stack extends JFrame{
 		
 		setBounds(100, 100, 300, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		dialog= new AddCircle();
-		objekti = new DefaultListModel();
+		
+		dialog= new AddCircle();   
+		objekti = new DefaultListModel(); 
+		
 
 		list = new JList(objekti); 
 		list.setBorder(new LineBorder(new Color(0, 0, 0), 4));
@@ -55,7 +57,7 @@ public class Stack extends JFrame{
 		panel.setLayout(new GridLayout(1, 5, 20, 20));
 		
 		
-		JButton add = new JButton("DODAJ");
+		JButton add = new JButton("DODAJ");  
 		add.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -64,18 +66,18 @@ public class Stack extends JFrame{
 					Circle c = dialog.showDialog(null);
 					
 					
-					if(c!=null) 
+					if(c!=null)  
 					{
-						objekti.addElement(c);
+						objekti.addElement(c); 
 						if(objekti.size()>0) 
 						{
 							for(int i = objekti.size()-1;i>0;i--) 
-							{
+							{ 
 								objekti.setElementAt(objekti.elementAt(i-1), i);
+								
 							}
-							objekti.setElementAt(c, 0);
+							objekti.setElementAt(c, 0);  
 						}
-					
 					}
 				}catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),"Greska",2);
@@ -90,14 +92,14 @@ public class Stack extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(list.getSelectedIndex()!=-1) {
-					try {
-						if(dialog.showDialog((Circle) objekti.get(list.getSelectedIndex()))!=null) {
-							objekti.remove(list.getSelectedIndex());
+				if(objekti.size() > 0) { 
+					try { 
+						if(dialog.showDialog((Circle) objekti.get(0))!=null) {
+							objekti.remove(0);
 						}
 						
 					} catch (Exception e1) {}
-				}else JOptionPane.showMessageDialog(null, "Selektuj neki element","Informacija",1);
+				}else JOptionPane.showMessageDialog(null, "Nema krugova!","Informacija",0);
 			}
 		});
 		del.setFont(new Font("Arial", Font.PLAIN, 17));
