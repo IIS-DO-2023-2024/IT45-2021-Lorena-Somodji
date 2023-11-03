@@ -11,6 +11,7 @@ public class Dot extends Shape {
 
 	private int x;   
 	private int y;
+	private Color color;
 
 	public Dot() {
 
@@ -27,12 +28,19 @@ public class Dot extends Shape {
 		}
 	}
 	
-	public Dot(int x, int y, Color colorDrive) throws Exception    
+	public Dot (int x, int y, Color color)
+	{
+		this.x = x;
+		this.y = y;
+		this.color = color;
+	}
+	
+	/*public Dot(int x, int y, Color colorDrive) throws Exception    
 	{ 
 		this(x,y); 
 		this.selected =false;
 		this.colorDrive=colorDrive;
-	}
+	}*/
 	
 	public int getX() { 
 		return this.x;

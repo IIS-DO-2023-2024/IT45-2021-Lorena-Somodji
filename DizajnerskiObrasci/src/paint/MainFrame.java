@@ -171,7 +171,6 @@ public class MainFrame extends JFrame{
 				
 			}
 			{
-				 
 				JButton editButton = new JButton("EDIT");
 				editButton.setBackground(Color.WHITE);
 				editButton.setActionCommand("");
@@ -179,7 +178,7 @@ public class MainFrame extends JFrame{
 					@Override 
 					public void mouseClicked(MouseEvent e) {
 						if(drawPanel.getSelect()) { 
-							
+						drawPanel.edit();
 						} else JOptionPane.showMessageDialog(null, "Nema selektovanog objekata!");
 						
 					}
