@@ -28,11 +28,10 @@ public class Dot extends Shape {
 		}
 	}
 	
-	public Dot (int x, int y, Color color)
+	public Dot (int x, int y, Color color) throws Exception
 	{
-		this.x = x;
-		this.y = y;
-		this.color = color;
+		this(x,y);
+		this.colorDrive = color;
 	}
 	
 	/*public Dot(int x, int y, Color colorDrive) throws Exception    

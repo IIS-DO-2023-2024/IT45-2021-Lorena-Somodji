@@ -9,7 +9,8 @@ public class DrawingModel {
 	
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 	public void add(Shape s) {
-		shapes.add(s);
+		if(s != null)
+			shapes.add(s);
 	}
 	public void remove (Shape s) {
 		shapes.remove(s);
@@ -20,5 +21,13 @@ public class DrawingModel {
 	public ArrayList<Shape> getShapes(){
 		return shapes;
 	}
-
+	public int size() {
+		return shapes.size();
+	}
+	public void set(int index, Shape shape) {
+		shapes.set(index, shape);
+	}
+	public int indexOf(Shape shape) {
+		return shapes.indexOf(shape);
+	}
 }

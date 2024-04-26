@@ -47,7 +47,7 @@ public class Dialog extends JDialog {
 
 	public Dialog() {
 		
-		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 450);
 		getContentPane().setLayout(new BorderLayout());
 		
@@ -296,7 +296,16 @@ public class Dialog extends JDialog {
 		if(shape!=null) {
 			this.Prepare(shape.getShape());
 	
-			if(shape instanceof Circle) 
+			if (shape instanceof Donut) 
+			{
+				Donut d = (Donut) shape;
+				this.x.setText(d.getCenter().getX()+"");
+				this.y.setText(d.getCenter().getY()+"");
+				this.a.setText(d.getRadius()+"");
+				this.b.setText(d.getInnerRadius()+"");
+				this.colorsDrive.setBackground(d.getColorDrive());
+				this.colorsFill.setBackground(d.getColorFill());
+			}else if(shape instanceof Circle) 
 			{
 				 Circle c = (Circle) shape;
 				 this.x.setText(c.getCenter().getX()+"");
@@ -313,15 +322,6 @@ public class Dialog extends JDialog {
 				this.b.setText(r.getWidth()+"");
 				this.colorsDrive.setBackground(r.getColorDrive());
 				this.colorsFill.setBackground(r.getColorFill());
-			}else if (shape instanceof Donut) 
-			{
-				Donut d = (Donut) shape;
-				this.x.setText(d.getCenter().getX()+"");
-				this.y.setText(d.getCenter().getY()+"");
-				this.a.setText(d.getRadius()+"");
-				this.b.setText(d.getInnerRadius()+"");
-				this.colorsDrive.setBackground(d.getColorDrive());
-				this.colorsFill.setBackground(d.getColorFill());
 			}else if(shape instanceof Dot) 
 			{
 				 Dot d = (Dot)shape;
@@ -390,7 +390,18 @@ public class Dialog extends JDialog {
 	public Shape swapValuesShape(Shape shape) 
 	{
 		try { 
-			if(shape instanceof Circle) 
+			if (shape instanceof Donut) 
+			{
+				Donut donut = (Donut)shape;
+				donut.moveTo(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
+				donut.setRadius(Integer.parseInt(a.getText()));
+				donut.setInnerRadius(Integer.parseInt(b.getText()));
+				donut.setColorDrive(colorsDrive.getBackground());
+				donut.setColorFill(colorsFill.getBackground());
+				
+				return donut;
+			
+			} else if(shape instanceof Circle) 
 			{ 
 				Circle circle = (Circle)shape;
 				circle.moveTo(Integer.parseInt(x.getText().trim()), Integer.parseInt(y.getText().trim()));
@@ -411,17 +422,6 @@ public class Dialog extends JDialog {
 				
 				return rectangle;
 		
-			}else if (shape instanceof Donut) 
-			{
-				Donut donut = (Donut)shape;
-				donut.moveTo(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
-				donut.setRadius(Integer.parseInt(a.getText()));
-				donut.setInnerRadius(Integer.parseInt(b.getText()));
-				donut.setColorDrive(colorsDrive.getBackground());
-				donut.setColorFill(colorsFill.getBackground());
-				
-				return donut;
-			
 			}else if(shape instanceof Dot) 
 			{
 				Dot dot = (Dot)shape;

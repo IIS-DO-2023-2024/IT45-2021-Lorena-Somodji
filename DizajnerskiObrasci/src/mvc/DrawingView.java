@@ -27,7 +27,8 @@ public class DrawingView extends JPanel {
 	public void paint(Graphics g) {
 		Iterator<Shape> it = model.getShapes().iterator();
 		while(it.hasNext()) {
-			it.next().draw(g, false);
+			Shape s = it.next();
+			s.draw(g, s.isSelected());
 		}
 	//ovde ne treba da se nalazi repaint
 	}

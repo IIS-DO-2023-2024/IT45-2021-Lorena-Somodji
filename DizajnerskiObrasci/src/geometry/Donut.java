@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 
 public class Donut extends Circle {
 	private int inner_radius; 
@@ -41,13 +43,21 @@ public class Donut extends Circle {
 				
 			
 			 }
-			
-			g.setColor(this.getColorFill());
-			g.fillOval(getCenter().getX()-getRadius(), getCenter().getY()-getRadius(), getRadius()*2, getRadius()*2);
-			g.setColor(Color.white);
-			g.fillOval(getCenter().getX()-getInnerRadius(), getCenter().getY()-getInnerRadius(), getInnerRadius()*2, getInnerRadius()*2);
-			
 			Graphics2D g2 = (Graphics2D) g;
+			Ellipse2D outerElipse = new Ellipse2D.Double(getCenter().getX() - getRadius(), 
+					getCenter().getY() - getRadius(), 
+					2 * getRadius(), 
+					2 * getRadius());
+			Ellipse2D innerEllipse = new Ellipse2D.Double(getCenter().getX() - inner_radius, 
+					getCenter().getY() - inner_radius, 
+					2 * inner_radius,
+					2 * inner_radius);
+			Area outerArea = new Area(outerElipse);
+	        Area innerArea = new Area(innerEllipse);
+	        outerArea.subtract(innerArea);
+			g2.setColor(this.getColorFill());
+			g2.fill(outerArea);
+			
 			g2.setColor(this.getColorDrive());
 			g2.setStroke(new BasicStroke(3f));
 			g2.drawOval(getCenter().getX()-getInnerRadius(), getCenter().getY()-getInnerRadius(), getInnerRadius()*2, getInnerRadius()*2);
@@ -82,7 +92,7 @@ public class Donut extends Circle {
 	{
 		if(this.getRadius() != inner_radius && this.getRadius() > inner_radius  && inner_radius>0  ) 
 		{
-			this.inner_radius = inner_radius; 
+			this.inner_radius = innerRadius; 
 		}
 		else
 		{

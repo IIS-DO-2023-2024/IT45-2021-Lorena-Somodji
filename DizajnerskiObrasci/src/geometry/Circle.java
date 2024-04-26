@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 
 public class Circle extends Shape {
 	
@@ -64,7 +63,7 @@ public class Circle extends Shape {
 
 	public void setRadius(int radius) throws Exception {
 		if(radius < 0) {
-			throw new Exception("Radius ne može da bude manji od 0");
+			throw new Exception("Radius ne moze da bude manji od 0");
 		}
 		this.radius = radius;
 	}
