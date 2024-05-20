@@ -153,6 +153,15 @@ public class Dot extends Shape {
 		return ( this.distance(one.getX(), one.getY()) <= 4 );
 	}
 
+	@Override
+	public void clone(Shape shape) throws Exception {
+		if (shape instanceof Dot) {
+			super.clone(shape);
+			Dot p = (Dot) shape;
+			this.setX(p.x);
+			this.setY(p.y);
+		}
+	}
 }
 
 

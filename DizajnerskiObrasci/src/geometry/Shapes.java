@@ -4,5 +4,6 @@ public enum Shapes {
 	RECTANGLE,
 	LINE,
 	CIRCLE,
-	DONUT
+	DONUT,
+	HEXAGON
 }

@@ -170,5 +170,16 @@ public class Rectangle extends Shape {
 		return false;
 	}
 
+	@Override
+	public void clone(Shape shape) throws Exception {
+		if (shape instanceof Rectangle) {
+			super.clone(shape);
+			Rectangle r = (Rectangle) shape;
+			this.upperLeftPoint.clone(r.upperLeftPoint);
+			this.setWidth(r.width);
+			this.setHeight(r.height);
+			this.setColorFill(r.colorFill);
+		}
+	}
 }
 

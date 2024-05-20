@@ -79,6 +79,9 @@ public class DrawingController {
 			}else if(currentShape == Shapes.DONUT.toString()) 
 			{
 				model.add(dialog.showDialog(frame.getColor(), one, Shapes.DONUT));
+			}else if(currentShape == Shapes.HEXAGON.toString()) 
+			{
+				model.add(dialog.showDialog(frame.getColor(), one, Shapes.HEXAGON));
 			}
 			frame.repaint();
 		}catch(Exception e) { JOptionPane.showMessageDialog(null, e, "Greska", 2); }
@@ -88,7 +91,7 @@ public class DrawingController {
 		if(e.getButton() == MouseEvent.BUTTON1) 
 		{
 			this.prevSelected = this.currentShape;
-			this.currentShape = frame.SelektovanoDugme();
+			this.currentShape = frame.selectedButton();
 			
 			if(getSelect()) 
 			{ 

@@ -34,7 +34,7 @@ public class DrawingFrame extends JFrame{
 	}
 	
 	
-	public String SelektovanoDugme() {
+	public String selectedButton() {
         for (Enumeration<AbstractButton> buttons = btnGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
 
@@ -97,18 +97,21 @@ public class DrawingFrame extends JFrame{
 		JRadioButton rectangle = new JRadioButton(Shapes.RECTANGLE.toString());
 		JRadioButton circle = new JRadioButton(Shapes.CIRCLE.toString());
 		JRadioButton donut = new JRadioButton(Shapes.DONUT.toString());
+		JRadioButton hexagon = new JRadioButton(Shapes.HEXAGON.toString());
 		
 		btnGroup.add(dot);
 		btnGroup.add(line);
 		btnGroup.add(rectangle);
 		btnGroup.add(circle);
 		btnGroup.add(donut);
+		btnGroup.add(hexagon);
 		
 		shapes.add(dot);
 		shapes.add(line);
 		shapes.add(rectangle);
 		shapes.add(circle);
 		shapes.add(donut);
+		shapes.add(hexagon);
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBackground(Color.LIGHT_GRAY);
@@ -124,7 +127,7 @@ public class DrawingFrame extends JFrame{
 					if(controller.getSelect()){
 						int rezult = JOptionPane.showConfirmDialog(
 								null,
-								"Da li zelite da obrisete oblik?",
+								"Da li želite da obrišete oblik?",
 								"Poruka",
 								JOptionPane.YES_NO_OPTION); 
 						if(rezult == JOptionPane.YES_OPTION){

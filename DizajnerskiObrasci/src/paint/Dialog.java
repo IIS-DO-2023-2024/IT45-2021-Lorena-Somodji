@@ -7,6 +7,8 @@ import geometry.Line;
 import geometry.Shape;
 import geometry.Shapes;
 import geometry.Dot;
+import geometry.HexagonAdapter;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.event.MouseAdapter;
@@ -271,6 +273,16 @@ public class Dialog extends JDialog {
 			a.setVisible(true);;
 			b.setVisible(true);
 			colorsFill.setVisible(false);
+		}else if(ob == Shapes.HEXAGON) 
+		{
+			naslov.setText("SET HEXAGON PARAMETERS!");
+			parameter3.setText("RADIUS LENGHT");
+			
+			parameter3.setVisible(true);
+			parameter4.setVisible(false);
+			a.setVisible(true);
+			b.setVisible(false);
+			colorsFill.setVisible(true);
 		}
 	}
 	
@@ -336,6 +348,14 @@ public class Dialog extends JDialog {
 				this.a.setText(r.getEndPoint().getX()+"");
 				this.b.setText(r.getEndPoint().getY()+"");
 				this.colorsDrive.setBackground(r.getColorDrive());
+			}else if(shape instanceof HexagonAdapter) 
+			{
+				HexagonAdapter h = (HexagonAdapter) shape;
+				this.x.setText(h.getX()+"");
+				this.y.setText(h.getY()+"");
+				this.a.setText(h.getR()+"");
+				this.colorsDrive.setBackground(h.getColorDrive());
+				this.colorsFill.setBackground(h.getColorFill());
 			}
 				
 			this.setModal(true);
@@ -378,6 +398,11 @@ public class Dialog extends JDialog {
 			{
 				shape = new Line(tacka,new Dot(Integer.parseInt(a.getText().trim()),Integer.parseInt(b.getText().trim())),colorsDrive.getBackground());
 				return shape;
+			} else if(ob == Shapes.HEXAGON) 
+			{
+				shape = new HexagonAdapter(tacka, Integer.parseInt(a.getText().trim()) , colorsDrive.getBackground(), colorsFill.getBackground());
+				return shape;
+					
 			} else return null;
 		}
 		catch(Exception e) 
@@ -409,7 +434,7 @@ public class Dialog extends JDialog {
 				circle.setColorDrive(colorsDrive.getBackground());
 				circle.setColorFill(colorsFill.getBackground());
 				
-				return shape;
+				return circle;
 					
 			}else if(shape instanceof Rectangle) 
 			{
@@ -438,6 +463,16 @@ public class Dialog extends JDialog {
 				line.setColorDrive(colorsDrive.getBackground());
 				
 				return line;
+			} else if(shape instanceof HexagonAdapter) 
+			{ 
+				HexagonAdapter hexagon = (HexagonAdapter)shape;
+				hexagon.moveTo(Integer.parseInt(x.getText().trim()), Integer.parseInt(y.getText().trim()));
+				hexagon.setR(Integer.parseInt(a.getText().trim()));
+				hexagon.setColorDrive(colorsDrive.getBackground());
+				hexagon.setColorFill(colorsFill.getBackground());
+				
+				return hexagon;
+					
 			} else return null;
 		}catch(Exception e) { 
 			JOptionPane.showMessageDialog(null, e.getMessage());

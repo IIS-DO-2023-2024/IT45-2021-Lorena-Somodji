@@ -100,5 +100,13 @@ public class Donut extends Circle {
 			else if (inner_radius >= super.getRadius()) throw new Exception ("Spoljasnji poluprecnik mora biti veci od unutrasnjeg!");
 		}
 	}
+	
+	@Override
+	public void clone(Shape shape) throws Exception {
+		if (shape instanceof Donut) {
+			super.clone(shape);
+			this.setInnerRadius(((Donut)shape).inner_radius);
+		}
+	}
 }
 

@@ -126,5 +126,15 @@ public class Line extends Shape {
 		if(this.getStartPoint().distance(one.getX(), one.getY())+this.getEndPoint().distance(one.getX(), one.getY()) - this.length() < 0.05f && this.getStartPoint().distance(one.getX(), one.getY())+this.getEndPoint().distance(one.getX(), one.getY()) - this.length() > -0.05f) return true;
 		else return false;
 	}
+	
+	@Override
+	public void clone(Shape shape) throws Exception {
+		if (shape instanceof Line) {
+			super.clone(shape);
+			Line l = (Line) shape;
+			this.startPoint.clone(l.startPoint);
+			this.endPoint.clone(l.endPoint);
+		}
+	}
 }
 

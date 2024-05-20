@@ -45,4 +45,7 @@ public abstract class Shape implements Moveable, Comparable {
 		return this.selected;
 	}
 	
+	public void clone(Shape shape) throws Exception {
+		this.colorDrive = shape.colorDrive;
+	}
 }

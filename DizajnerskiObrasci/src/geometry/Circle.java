@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 
 public class Circle extends Shape {
 	
@@ -167,5 +168,15 @@ public class Circle extends Shape {
 		}else return -1;
 	}
 
+	@Override
+	public void clone(Shape shape) throws Exception {
+		if (shape instanceof Circle) {
+			super.clone(shape);
+			Circle c = (Circle) shape;
+			this.center.clone(c.center);
+			this.setRadius(c.radius);
+			this.setColorFill(c.colorFill);
+		}
+	}
 }
 
