@@ -11,6 +11,10 @@ import java.awt.geom.Ellipse2D;
 public class Donut extends Circle {
 	private int inner_radius; 
 	
+	public Donut() {
+		super();
+	}
+	
 	public Donut(Dot center, int outer_radius, int inner_radius, Color colorDrive, Color colorFill) throws Exception {
 		super(center, outer_radius, colorDrive, colorFill);
 		if(outer_radius != inner_radius && outer_radius > inner_radius) 
@@ -90,14 +94,14 @@ public class Donut extends Circle {
 	
 	public void setInnerRadius(int innerRadius) throws Exception
 	{
-		if(this.getRadius() != inner_radius && this.getRadius() > inner_radius  && inner_radius>0  ) 
+		if(this.getRadius() != innerRadius && this.getRadius() > innerRadius && innerRadius>0  ) 
 		{
 			this.inner_radius = innerRadius; 
 		}
 		else
 		{
-			if(inner_radius <=0 ) throw new Exception ("Unutrasnji poluprecnik mora biti pozitivan!");
-			else if (inner_radius >= super.getRadius()) throw new Exception ("Spoljasnji poluprecnik mora biti veci od unutrasnjeg!");
+			if(innerRadius <=0 ) throw new Exception ("Unutrasnji poluprecnik mora biti pozitivan!");
+			else if (innerRadius >= super.getRadius()) throw new Exception ("Spoljasnji poluprecnik mora biti veci od unutrasnjeg!");
 		}
 	}
 	

@@ -9,10 +9,14 @@ public class HexagonAdapter extends Shape {
 
 	private Hexagon hexagon;
 	
+	public HexagonAdapter() {
+		this.hexagon = new Hexagon(0,0,0);
+	}
+	
 	public HexagonAdapter(Dot center, int r) throws Exception {
+		this();
 		if(center != null && r>0) 
 		{
-			this.hexagon = new Hexagon(0,0,0);
 			this.setX(center.getX());
 			this.setY(center.getY());
 			this.setR(r);

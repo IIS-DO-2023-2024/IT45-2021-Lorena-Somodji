@@ -1,17 +1,20 @@
 package mvc;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
+import command.AddShapeCmd;
+import command.Command;
+import command.DeselectShapeCmd;
+import command.RemoveShapeCmd;
+import command.SelectShapeCmd;
+import command.UpdateShapeCmd;
 import geometry.Dot;
 import geometry.Line;
 import geometry.Shape;
 import geometry.Shapes;
-
 import paint.Dialog;
 
 public class DrawingController {
@@ -37,53 +40,59 @@ public class DrawingController {
 		return this.selectedShape != null;
 	}
 	
+	private void execute(Command cmd) {
+		cmd.execute();
+		frame.repaint();
+	}
+	
 	private void select(Dot one) {
 		for(int i = model.size()-1; i>=0; i--)
 		{
 			Shape shape = model.get(i);
 			if(shape.contains(one)) 
 			{
-				shape.setSelected(true);
+				execute(new SelectShapeCmd(shape));
 				selectedShape = shape;
-				frame.repaint();
 				return;
 			}
 		}
 		this.deselect();
-		frame.repaint();
 	}
 	
 	private void deselect() {
 		for(Shape s : model.getShapes()) {
-			s.setSelected(false);
+			if(s.isSelected()) execute(new DeselectShapeCmd(s));
 		}
 		this.selectedShape = null;
-		frame.repaint();
 	}
 	
 	private void AddObject() 
 	{
 		try {
+			Shape shape = null;
 			if(currentShape == Shapes.DOT.toString()) 
 			{ 
-				model.add(new Dot(one.getX(),one.getY(),frame.getColor()));
+				shape = new Dot(one.getX(),one.getY(),frame.getColor());
 			} else if(currentShape == Shapes.LINE.toString()) 
 			{
-				if(one != null && two != null) model.add(new Line(one,two,frame.getColor()));
+				if(one != null && two != null) shape = new Line(one,two,frame.getColor());
 			}else if(currentShape == Shapes.RECTANGLE.toString()) 
 			{
-				model.add(dialog.showDialog( frame.getColor(), one, Shapes.RECTANGLE));
+				shape = dialog.showDialog( frame.getColor(), one, Shapes.RECTANGLE);
 			}else if(currentShape == Shapes.CIRCLE.toString()) 
 			{
-				model.add(dialog.showDialog(frame.getColor(), one, Shapes.CIRCLE));
+				shape = dialog.showDialog(frame.getColor(), one, Shapes.CIRCLE);
 			}else if(currentShape == Shapes.DONUT.toString()) 
 			{
-				model.add(dialog.showDialog(frame.getColor(), one, Shapes.DONUT));
+				shape = dialog.showDialog(frame.getColor(), one, Shapes.DONUT);
 			}else if(currentShape == Shapes.HEXAGON.toString()) 
 			{
-				model.add(dialog.showDialog(frame.getColor(), one, Shapes.HEXAGON));
+				shape = dialog.showDialog(frame.getColor(), one, Shapes.HEXAGON);
 			}
-			frame.repaint();
+			
+			if(shape != null) {
+				execute(new AddShapeCmd(shape, model));
+			}
 		}catch(Exception e) { JOptionPane.showMessageDialog(null, e, "Greska", 2); }
 	}
 	
@@ -132,9 +141,8 @@ public class DrawingController {
 	public void delete() {
 		if(selectedShape != null) 
 		{
-			model.remove(selectedShape);
+			execute(new RemoveShapeCmd(selectedShape, model));
 			selectedShape = null;
-			frame.repaint();
 		}
 	}
 	
@@ -143,10 +151,12 @@ public class DrawingController {
 		{
 			Shape obl =  dialog.showDialog(selectedShape);
 			if(obl!=null) {
-				model.set(model.indexOf(selectedShape),obl);
+				try {
+					execute(new UpdateShapeCmd(selectedShape, obl));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
 			}
-			
-			frame.repaint();
 		}
 	}
 }
