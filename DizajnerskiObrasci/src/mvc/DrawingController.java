@@ -2,6 +2,7 @@ package mvc;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
@@ -28,6 +29,8 @@ public class DrawingController {
 	private Dot one, two;
 	
 	private Shape selectedShape;
+	private Stack<Command> undoStack = new Stack<>();
+	private Stack<Command> redoStack = new Stack<>();
 	
 	public DrawingController (DrawingModel model, DrawingFrame frame)
 	{
@@ -42,6 +45,28 @@ public class DrawingController {
 	
 	private void execute(Command cmd) {
 		cmd.execute();
+		undoStack.push(cmd);
+		redoStack.clear();
+		frame.repaint();
+	}
+	public void undo() {
+		if(undoStack.empty()) {
+			JOptionPane.showMessageDialog(null, "Nothing to undo!");
+			return;
+		}
+		Command cmd = undoStack.pop();
+		cmd.unexecute();
+		redoStack.push(cmd);
+		frame.repaint();
+	}
+	public void redo() {
+		if(redoStack.empty()) {
+			JOptionPane.showMessageDialog(null, "Nothing to redo!");
+			return;
+		}
+		Command cmd = redoStack.pop();
+		cmd.execute();
+		undoStack.push(cmd);
 		frame.repaint();
 	}
 	
@@ -159,4 +184,6 @@ public class DrawingController {
 			}
 		}
 	}
+
+	
 }

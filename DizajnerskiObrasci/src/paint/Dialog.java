@@ -361,7 +361,7 @@ public class Dialog extends JDialog {
 			this.setModal(true);
 			this.setVisible(true);
 			
-			if(result) return this.swapValuesShape(shape); 
+			if(result) return this.createShape(shape.getShape()); //this.swapValuesShape(shape); 
 			else return null;
 		}
 		

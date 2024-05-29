@@ -7,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DrawingFrame extends JFrame{
 
@@ -157,6 +159,26 @@ public class DrawingFrame extends JFrame{
 				});
 				buttonPane.add(editButton);
 			}
+			
+			JButton undoButton = new JButton("UNDO");
+			undoButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					controller.undo();
+				}
+			});
+			undoButton.setBackground(Color.WHITE);
+			undoButton.setActionCommand("");
+			buttonPane.add(undoButton);
+			
+			JButton redoButton = new JButton("REDO");
+			redoButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.redo();
+				}
+			});
+			redoButton.setBackground(Color.WHITE);
+			redoButton.setActionCommand("");
+			buttonPane.add(redoButton);
 		
 		view.addMouseListener(new MouseAdapter() {
 			@Override
