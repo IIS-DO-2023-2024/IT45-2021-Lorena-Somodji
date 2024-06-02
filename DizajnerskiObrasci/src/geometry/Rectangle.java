@@ -93,7 +93,8 @@ public class Rectangle extends Shape {
 
 	@Override
 	public String toString() {
-		return "Upper left point: " + this.upperLeftPoint + ", width = "+ this.width + ", height = "+ this.height;
+		return "Rectangle [upperLeftPoint=" + upperLeftPoint + ", width=" + width + ", height=" + height
+				+ ", colorDrive=" + colorDrive + ", colorFill=" + colorFill + "]";
 	}
 
 	@Override

@@ -25,4 +25,9 @@ public class RemoveShapeCmd implements Command {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Remove [shape=" + shape + "]";
+	}
+
 }

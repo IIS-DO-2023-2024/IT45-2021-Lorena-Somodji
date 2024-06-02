@@ -79,7 +79,7 @@ public class Dot extends Shape {
 
 	@Override
 	public String toString() {
-		return "("+this.x+","+this.y+")";
+		return "Dot (x=" + x + ", y=" + y + (colorDrive != null ? ", color=" + colorDrive : "") + ")";
 	}
 
 	@Override

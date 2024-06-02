@@ -20,4 +20,9 @@ public class SelectShapeCmd implements Command {
 		shape.setSelected(false);
 	}
 
+	@Override
+	public String toString() {
+		return "Select [shape=" + shape + "]";
+	}
+
 }

@@ -16,6 +16,7 @@ public class DrawingFrame extends JFrame{
 	private ButtonGroup btnGroup; 
 	private JPanel colors;
 	private DrawingController controller;
+	private JTextArea textArea;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -190,6 +191,21 @@ public class DrawingFrame extends JFrame{
 		view.setBounds(0, 72, 434, 189);
 		MainPanel.add(view,BorderLayout.CENTER);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(200, 10));
+		MainPanel.add(scrollPane, BorderLayout.WEST);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		panel.add(textArea, BorderLayout.CENTER);
+		
+		JLabel lblLog = new JLabel("LOG");
+		panel.add(lblLog, BorderLayout.NORTH);
+		
 	}
 
 
@@ -204,6 +220,9 @@ public class DrawingFrame extends JFrame{
 	
 	public Color getColor() {
 		return colors.getBackground();
+	}
+	public JTextArea getTextArea() {
+		return textArea;
 	}
 }
 

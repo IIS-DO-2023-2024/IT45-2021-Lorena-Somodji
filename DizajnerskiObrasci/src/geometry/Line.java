@@ -58,7 +58,7 @@ public class Line extends Shape {
 
 	@Override
 	public String toString() {
-		return this.startPoint + "-->" + this.endPoint;
+		return "Line [startPoint=" + startPoint + ", endPoint=" + endPoint + ", color=" + colorDrive + "]";
 	}
 
 	@Override

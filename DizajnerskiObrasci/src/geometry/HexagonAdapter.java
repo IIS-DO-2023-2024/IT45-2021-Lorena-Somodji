@@ -130,4 +130,10 @@ public class HexagonAdapter extends Shape {
 			this.setColorFill(h.getColorFill());
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "HexagonAdapter [x=" + getX() + ", y=" + getY() + ", r=" + getR() + ", colorDrive="
+				+ getColorDrive() + ", colorFill=" + getColorFill() + "]";
+	}
 }

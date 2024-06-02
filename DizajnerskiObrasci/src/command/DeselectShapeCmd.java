@@ -20,4 +20,9 @@ public class DeselectShapeCmd implements Command {
 		shape.setSelected(true);
 	}
 
+	@Override
+	public String toString() {
+		return "Deselect [shape=" + shape + "]";
+	}
+
 }

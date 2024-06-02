@@ -63,4 +63,9 @@ public class UpdateShapeCmd implements Command {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Update [shape=" + shape + ", newState=" + newState + "]";
+	}
+
 }

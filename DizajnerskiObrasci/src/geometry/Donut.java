@@ -112,5 +112,11 @@ public class Donut extends Circle {
 			this.setInnerRadius(((Donut)shape).inner_radius);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Donut [center=" + getCenter() + ", radius=" + getRadius() + ", inner_radius=" + inner_radius
+				+ ", colorDrive=" + getColorDrive() + ", colorFill=" + getColorFill() + "]";
+	}
 }
 

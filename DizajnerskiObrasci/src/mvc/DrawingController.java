@@ -47,6 +47,7 @@ public class DrawingController {
 		cmd.execute();
 		undoStack.push(cmd);
 		redoStack.clear();
+		frame.getTextArea().append(cmd.toString() + '\n');
 		frame.repaint();
 	}
 	public void undo() {
@@ -57,6 +58,7 @@ public class DrawingController {
 		Command cmd = undoStack.pop();
 		cmd.unexecute();
 		redoStack.push(cmd);
+		frame.getTextArea().append("Undo - " + cmd + '\n');
 		frame.repaint();
 	}
 	public void redo() {
@@ -67,6 +69,7 @@ public class DrawingController {
 		Command cmd = redoStack.pop();
 		cmd.execute();
 		undoStack.push(cmd);
+		frame.getTextArea().append("Redo - " + cmd + '\n');
 		frame.repaint();
 	}
 	

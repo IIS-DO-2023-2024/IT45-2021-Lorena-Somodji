@@ -102,7 +102,8 @@ public class Circle extends Shape {
 	
 	@Override
 	public String toString() {
-		return "Krug povrsine "+this.area();
+		return "Circle [center=" + center + ", radius=" + radius + ", colorDrive=" + colorDrive + ", colorFill="
+				+ colorFill + "]";
 	}
 
 	@Override
