@@ -2,9 +2,12 @@ package mvc;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Stack;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import command.AddShapeCmd;
 import command.Command;
@@ -17,6 +20,7 @@ import geometry.Line;
 import geometry.Shape;
 import geometry.Shapes;
 import paint.Dialog;
+import strategy.DrawingFileStrategy;
 
 public class DrawingController {
 	
@@ -32,10 +36,16 @@ public class DrawingController {
 	private Stack<Command> undoStack = new Stack<>();
 	private Stack<Command> redoStack = new Stack<>();
 	
+	private DrawingFileStrategy drawingFileStrategy;
+	
 	public DrawingController (DrawingModel model, DrawingFrame frame)
 	{
 		this.model = model;
 		this.frame = frame;
+	}
+	
+	public void setDrawingFileStrategy(DrawingFileStrategy drawingFileStrategy) {
+		this.drawingFileStrategy = drawingFileStrategy;
 	}
 	
 	public boolean getSelect()
@@ -185,6 +195,33 @@ public class DrawingController {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			}
+		}
+	}
+
+	public void loadDrawing() {
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("BIN files", "bin");
+		fileChooser.setFileFilter(filter);
+		if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			String path = file.getAbsolutePath();
+			model.getShapes().clear();
+			undoStack.clear();
+			redoStack.clear();
+			selectedShape = null;
+			model.setShapes(drawingFileStrategy.load(path));
+			frame.repaint();
+		}
+	}
+
+	public void saveDrawing() {
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("BIN files", "bin");
+		fileChooser.setFileFilter(filter);
+		if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			String path = file.getAbsolutePath();
+			drawingFileStrategy.save(model.getShapes(), path + ".bin");
 		}
 	}
 

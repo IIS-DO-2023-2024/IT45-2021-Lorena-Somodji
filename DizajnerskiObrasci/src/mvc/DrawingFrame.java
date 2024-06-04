@@ -180,6 +180,24 @@ public class DrawingFrame extends JFrame{
 			redoButton.setBackground(Color.WHITE);
 			redoButton.setActionCommand("");
 			buttonPane.add(redoButton);
+			
+			JButton btnSaveDrawing = new JButton("SAVE");
+			btnSaveDrawing.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.saveDrawing();
+				}
+			});
+			btnSaveDrawing.setBackground(Color.WHITE);
+			buttonPane.add(btnSaveDrawing);
+			
+			JButton btnLoadDrawing = new JButton("LOAD");
+			btnLoadDrawing.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					controller.loadDrawing();
+				}
+			});
+			btnLoadDrawing.setBackground(Color.WHITE);
+			buttonPane.add(btnLoadDrawing);
 		
 		view.addMouseListener(new MouseAdapter() {
 			@Override

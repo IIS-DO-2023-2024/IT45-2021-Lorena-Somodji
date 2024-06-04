@@ -21,6 +21,9 @@ public class DrawingModel {
 	public ArrayList<Shape> getShapes(){
 		return shapes;
 	}
+	public void setShapes(ArrayList<Shape> shapes) {
+		this.shapes = shapes;
+	}
 	public int size() {
 		return shapes.size();
 	}
