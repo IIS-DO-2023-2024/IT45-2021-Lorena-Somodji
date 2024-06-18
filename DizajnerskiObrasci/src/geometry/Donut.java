@@ -118,5 +118,13 @@ public class Donut extends Circle {
 		return "Donut [center=" + getCenter() + ", radius=" + getRadius() + ", inner_radius=" + inner_radius
 				+ ", colorDrive=" + getColorDrive() + ", colorFill=" + getColorFill() + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Donut) {
+			return super.equals(obj) && this.inner_radius == ((Donut)obj).inner_radius;
+		}
+		return false;
+	}
 }
 

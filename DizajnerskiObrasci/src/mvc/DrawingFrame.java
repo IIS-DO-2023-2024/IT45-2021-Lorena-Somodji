@@ -15,8 +15,17 @@ public class DrawingFrame extends JFrame{
 	private DrawingView view = new DrawingView();
 	private ButtonGroup btnGroup; 
 	private JPanel colors;
+	private JPanel innerColor;
 	private DrawingController controller;
 	private JTextArea textArea;
+	private JButton toFrontButton;
+	private JButton bringToBackButton;
+	private JButton bringToFrontButton;
+	private JButton undoButton;
+	private JButton delButton;
+	private JButton redoButton;
+	private JButton editButton;
+	private JButton toBackButton;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,7 +61,7 @@ public class DrawingFrame extends JFrame{
 	
 	private void initialize() {
 
-	    setBounds(100, 100, 1022, 464);
+	    setBounds(100, 100, 1114, 464);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -74,11 +83,12 @@ public class DrawingFrame extends JFrame{
 		colors.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Color boja = JColorChooser.showDialog(null, "Izaberi boju", Color.BLACK);
-				colors.setBackground(boja);
+				Color boja = JColorChooser.showDialog(null, "Izaberi boju", colors.getBackground());
+				if(boja != null)
+					colors.setBackground(boja);
 			}
 		});
-		colors.setPreferredSize(new Dimension(200,200));
+		colors.setPreferredSize(new Dimension(150, 200));
 		MenuPanel.add(colors, BorderLayout.EAST);
 		colors.setLayout(new BorderLayout(0, 0));
 		
@@ -116,12 +126,30 @@ public class DrawingFrame extends JFrame{
 		shapes.add(donut);
 		shapes.add(hexagon);
 		
+		innerColor = new JPanel();
+		innerColor.setBackground(Color.GRAY);
+		shapes.add(innerColor);
+		innerColor.setLayout(new BorderLayout(0, 0));
+		innerColor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Color boja = JColorChooser.showDialog(null, "Izaberi boju", innerColor.getBackground());
+				if(boja != null)
+					innerColor.setBackground(boja);
+			}
+		});
+		
+		JLabel lblChooseInnerColor = new JLabel("INNER COLOR");
+		lblChooseInnerColor.setFont(new Font("Tahoma", Font.BOLD, 14));
+		innerColor.add(lblChooseInnerColor, BorderLayout.CENTER);
+		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBackground(Color.LIGHT_GRAY);
 		buttonPane.setLayout(new FlowLayout(FlowLayout.LEFT));
 		MainPanel.add(buttonPane, BorderLayout.SOUTH);
 		{
-			JButton delButton = new JButton("DELETE");
+			delButton = new JButton("DELETE");
+			delButton.setEnabled(false);
 			delButton.setBackground(Color.WHITE);
 			delButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -146,7 +174,8 @@ public class DrawingFrame extends JFrame{
 				
 			}
 			{
-				JButton editButton = new JButton("EDIT");
+				editButton = new JButton("EDIT");
+				editButton.setEnabled(false);
 				editButton.setBackground(Color.WHITE);
 				editButton.setActionCommand("");
 				editButton.addMouseListener(new MouseAdapter() {
@@ -161,7 +190,8 @@ public class DrawingFrame extends JFrame{
 				buttonPane.add(editButton);
 			}
 			
-			JButton undoButton = new JButton("UNDO");
+			undoButton = new JButton("UNDO");
+			undoButton.setEnabled(false);
 			undoButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					controller.undo();
@@ -171,7 +201,8 @@ public class DrawingFrame extends JFrame{
 			undoButton.setActionCommand("");
 			buttonPane.add(undoButton);
 			
-			JButton redoButton = new JButton("REDO");
+			redoButton = new JButton("REDO");
+			redoButton.setEnabled(false);
 			redoButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					controller.redo();
@@ -181,23 +212,81 @@ public class DrawingFrame extends JFrame{
 			redoButton.setActionCommand("");
 			buttonPane.add(redoButton);
 			
-			JButton btnSaveDrawing = new JButton("SAVE");
-			btnSaveDrawing.addActionListener(new ActionListener() {
+			JButton saveDrawingButton = new JButton("SAVE");
+			saveDrawingButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					controller.saveDrawing();
 				}
 			});
-			btnSaveDrawing.setBackground(Color.WHITE);
-			buttonPane.add(btnSaveDrawing);
 			
-			JButton btnLoadDrawing = new JButton("LOAD");
-			btnLoadDrawing.addActionListener(new ActionListener() {
+			toFrontButton = new JButton("TO FRONT");
+			toFrontButton.setEnabled(false);
+			toFrontButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					controller.toFront();
+				}
+			});
+			toFrontButton.setBackground(Color.WHITE);
+			buttonPane.add(toFrontButton);
+			
+			toBackButton = new JButton("TO BACK");
+			toBackButton.setEnabled(false);
+			toBackButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.toBack();
+				}
+			});
+			toBackButton.setBackground(Color.WHITE);
+			buttonPane.add(toBackButton);
+			
+			bringToFrontButton = new JButton("BRING TO FRONT");
+			bringToFrontButton.setEnabled(false);
+			bringToFrontButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.bringToFront();
+				}
+			});
+			bringToFrontButton.setBackground(Color.WHITE);
+			buttonPane.add(bringToFrontButton);
+			
+			bringToBackButton = new JButton("BRING TO BACK");
+			bringToBackButton.setEnabled(false);
+			bringToBackButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.bringToBack();
+				}
+			});
+			bringToBackButton.setBackground(Color.WHITE);
+			buttonPane.add(bringToBackButton);
+			saveDrawingButton.setBackground(Color.WHITE);
+			buttonPane.add(saveDrawingButton);
+			
+			JButton loadDrawingButton = new JButton("LOAD");
+			loadDrawingButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					controller.loadDrawing();
 				}
 			});
-			btnLoadDrawing.setBackground(Color.WHITE);
-			buttonPane.add(btnLoadDrawing);
+			loadDrawingButton.setBackground(Color.WHITE);
+			buttonPane.add(loadDrawingButton);
+			
+			JButton saveLogButton = new JButton("SAVE LOG");
+			saveLogButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.saveLog();
+				}
+			});
+			saveLogButton.setBackground(Color.WHITE);
+			buttonPane.add(saveLogButton);
+			
+			JButton loadLogButton = new JButton("LOAD LOG");
+			loadLogButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.loadLog();
+				}
+			});
+			loadLogButton.setBackground(Color.WHITE);
+			buttonPane.add(loadLogButton);
 		
 		view.addMouseListener(new MouseAdapter() {
 			@Override
@@ -239,8 +328,35 @@ public class DrawingFrame extends JFrame{
 	public Color getColor() {
 		return colors.getBackground();
 	}
+	public Color getInnerColor() {
+		return innerColor.getBackground();
+	}
 	public JTextArea getTextArea() {
 		return textArea;
+	}
+	public JButton getToFrontButton() {
+		return toFrontButton;
+	}
+	public JButton getBringToBackButton() {
+		return bringToBackButton;
+	}
+	public JButton getBringToFrontButton() {
+		return bringToFrontButton;
+	}
+	public JButton getUndoButton() {
+		return undoButton;
+	}
+	public JButton getDelButton() {
+		return delButton;
+	}
+	public JButton getRedoButton() {
+		return redoButton;
+	}
+	public JButton getEditButton() {
+		return editButton;
+	}
+	public JButton getToBackButton() {
+		return toBackButton;
 	}
 }
 

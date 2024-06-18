@@ -286,10 +286,11 @@ public class Dialog extends JDialog {
 		}
 	}
 	
-	public Shape showDialog(Color c, Dot p, Shapes ob)
+	public Shape showDialog(Color c, Color innerC, Dot p, Shapes ob)
 	{
 		this.obl = ob;
-		this.colorsDrive.setBackground(c); 
+		this.colorsDrive.setBackground(c);
+		this.colorsFill.setBackground(innerC); 
 		this.x.setText(p.getX()+""); 
 		this.y.setText(p.getY()+"");
 		a.setText("");

@@ -136,4 +136,13 @@ public class HexagonAdapter extends Shape {
 		return "HexagonAdapter [x=" + getX() + ", y=" + getY() + ", r=" + getR() + ", colorDrive="
 				+ getColorDrive() + ", colorFill=" + getColorFill() + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof HexagonAdapter) {
+			HexagonAdapter ha = (HexagonAdapter)obj;
+			return this.getX() == ha.getX() && this.getY() == ha.getY() && this.getR() == ha.getR();
+		}
+		return false;
+	}
 }

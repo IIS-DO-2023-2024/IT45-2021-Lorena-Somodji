@@ -10,12 +10,6 @@ import geometry.Shape;
 public class DrawingView extends JPanel {
 	DrawingModel model = new DrawingModel();
 	
-
-	//izuzetak od pocetne mvc arhitekture
-	//model je na pocetku null vrednost
-	//DrawingModel model;
-	//DrawingModel model = new DrawingModel();
-
 	public DrawingModel getModel() {
 		return model;
 	}
@@ -30,6 +24,5 @@ public class DrawingView extends JPanel {
 			Shape s = it.next();
 			s.draw(g, s.isSelected());
 		}
-	//ovde ne treba da se nalazi repaint
 	}
 }

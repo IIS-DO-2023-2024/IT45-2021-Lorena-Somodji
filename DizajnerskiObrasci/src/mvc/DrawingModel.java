@@ -12,6 +12,10 @@ public class DrawingModel {
 		if(s != null)
 			shapes.add(s);
 	}
+	public void add(int index, Shape s) { 
+		if(s != null)
+			shapes.add(index, s);
+	}
 	public void remove (Shape s) {
 		shapes.remove(s);
 	}
