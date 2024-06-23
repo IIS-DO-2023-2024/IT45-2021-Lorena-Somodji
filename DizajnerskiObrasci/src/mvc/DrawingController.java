@@ -102,6 +102,7 @@ public class DrawingController {
 		updateObservers();
 		frame.repaint();
 	}
+	
 	public void undo() {
 		if(undoStack.empty()) {
 			JOptionPane.showMessageDialog(null, "Nothing to undo!");
@@ -215,7 +216,6 @@ public class DrawingController {
 			if(p != null) {
 				try {
 					one = new Dot(p.x,p.y);
-					//deselect();
 					select(one); 
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -435,7 +435,7 @@ public class DrawingController {
 	} 	
 	
 	public void toBack() {
-		if(selectedShapes.size() == 1 && model.indexOf(selectedShapes.get(0)) < model.size() - 1) {
+		if(selectedShapes.size() == 1 && model.indexOf(selectedShapes.get(0)) > 0) {
 			execute(new ToBackCmd(selectedShapes.get(0), model));
 		}
 	} 
@@ -447,7 +447,7 @@ public class DrawingController {
 	} 
 	
 	public void bringToBack() {
-		if(selectedShapes.size() == 1 && model.indexOf(selectedShapes.get(0)) < model.size() - 1) {
+		if(selectedShapes.size() == 1 && model.indexOf(selectedShapes.get(0)) > 0) {
 			execute(new BringToBackCmd(selectedShapes.get(0), model));
 		}
 	} 
